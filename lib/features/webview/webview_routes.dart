@@ -9,6 +9,22 @@ abstract final class WebviewRoutes {
   static const String webViewPath = '/web_view_screen';
   static const String confirmPath = '/confirm_screen';
 
+  static StatefulShellBranch buildShellBranch() =>
+      StatefulShellBranch(initialLocation: webViewPath, routes: [
+        GoRoute(
+          path: webViewPath,
+          name: webViewScreen,
+          builder: (context, state) => const WebViewScreen(),
+          routes: [
+            GoRoute(
+              path: confirmPath,
+              name: confirmScreen,
+              builder: (context, state) => const ConfirmScreen(),
+            )
+          ]
+        ),
+      ]);
+
   static GoRoute build() => GoRoute(
           path: webViewPath,
           name: webViewScreen,

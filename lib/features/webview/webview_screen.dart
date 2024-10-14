@@ -12,7 +12,7 @@ class WebViewScreen extends StatelessWidget {
       body: Center(
         child: ElevatedButton(
             onPressed: () {
-              context.goNamed(WebviewRoutes.confirmScreen);
+              context.pushNamed(WebviewRoutes.confirmScreen);
             },
             child: const Text('Перейти на ConfirmScreen')),
       ),

@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:go_router_example/features/main/main_routes.dart';
-import 'package:go_router_example/features/product/product_routes.dart';
 import 'package:go_router_example/features/root/root_routes.dart';
+import 'package:go_router_example/features/webview/webview_routes.dart';
 
 /// Класс, реализующий роутер приложения и все поля классов
 class AppRouter {
@@ -20,9 +20,9 @@ class AppRouter {
   GoRouter initRouter() {
     final routes = [
       // Нижнее навигационное меню
-      RootRoutes.rootRoutes(rootNavigatorKey),
+      RootRoutes.build(rootNavigatorKey),
       // Отдельный роут
-      ProductRoutes.routes,
+      WebviewRoutes.build(),
     ];
     return GoRouter(
       debugLogDiagnostics: true,

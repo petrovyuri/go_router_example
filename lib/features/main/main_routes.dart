@@ -5,14 +5,12 @@ abstract final class MainRoutes {
   static const String mainPath = '/main';
   static const String mainScreen = 'main_screen';
 
-  static StatefulShellBranch buildShellBranch() => StatefulShellBranch(
-        initialLocation: mainPath,
-        routes: [
-          GoRoute(
-            path: mainPath,
-            name: mainScreen,
-            builder: (context, state) => const MainScreen(),
-          ),
-        ],
-      );
+  static StatefulShellBranch buildShellBranch() =>
+      StatefulShellBranch(initialLocation: mainPath, routes: [
+        GoRoute(
+          path: mainPath,
+          name: mainScreen,
+          builder: (context, state) => const MainScreen(),
+        )
+      ]);
 }

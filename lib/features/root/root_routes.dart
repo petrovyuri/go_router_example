@@ -7,7 +7,7 @@ import 'package:go_router_example/features/root/root_screen.dart';
 
 /// Класс для реализации роутов по фиче корневой страницы
 abstract final class RootRoutes {
-  static RouteBase rootRoutes(GlobalKey<NavigatorState>? navigatorKey) {
+  static RouteBase build(GlobalKey<NavigatorState>? navigatorKey) {
     return StatefulShellRoute.indexedStack(
       parentNavigatorKey: navigatorKey,
       builder: (_, __, navigationShell) => RootScreen(navigationShell: navigationShell),

@@ -21,7 +21,7 @@ class AuthScreen extends StatelessWidget {
                 child: const Text('Перейти на RegScreen')),
             ElevatedButton(
                 onPressed: () {
-                  context.pushNamed(WebviewRoutes.webViewScreen);
+                  context.goNamed(WebviewRoutes.webViewScreen);
                 },
                 child: const Text('Перейти на WebViewScreen')),
           ],

@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:go_router_example/features/auth/auth_routes.dart';
 import 'package:go_router_example/features/main/main_routes.dart';
@@ -10,7 +10,8 @@ abstract final class RootRoutes {
   static RouteBase build(GlobalKey<NavigatorState>? navigatorKey) {
     return StatefulShellRoute.indexedStack(
       parentNavigatorKey: navigatorKey,
-      builder: (_, __, navigationShell) => RootScreen(navigationShell: navigationShell),
+      builder: (_, __, navigationShell) =>
+          RootScreen(navigationShell: navigationShell),
       branches: [
         MainRoutes.buildShellBranch(),
         ProfileRoutes.buildShellBranch(),

@@ -4,8 +4,7 @@ import 'package:go_router_example/app_router.dart';
 final _appRouter = AppRouter.instance.initRouter();
 
 void main() {
-  // const link = ProfileRoutes.secondDetailScreen;
-  // _appRouter.goNamed(link);
+  _appRouter.goNamed('web_main');
 
   runApp(const MyApp());
 }

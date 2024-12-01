@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:go_router_example/features/profile/profile_routes.dart';
+import 'package:go_router_example/features/root/root_screen.dart';
+import 'package:go_router_example/router/root_tabs_helper.dart';
+import 'package:go_router_example/router/routes.dart';
+import 'package:octopus/octopus.dart';
 
 class DetailScreen extends StatelessWidget {
   const DetailScreen({super.key});
@@ -11,9 +13,10 @@ class DetailScreen extends StatelessWidget {
       appBar: AppBar(title: const Text('DetailScreen')),
       body: Center(
         child: ElevatedButton(
-            onPressed: () {
-              context.goNamed(ProfileRoutes.secondDetailScreen);
-            },
+            onPressed: () => context.octopus.openInTab(
+                  RootTabs.profile,
+                  Routes.secondDetail,
+                ),
             child: const Text('go SecondDetailScreen')),
       ),
     );

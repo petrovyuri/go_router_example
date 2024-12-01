@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:go_router_example/features/main/main_routes.dart';
-import 'package:go_router_example/features/profile/profile_routes.dart';
 
 class SecondDetailScreen extends StatelessWidget {
   const SecondDetailScreen({super.key});
@@ -15,12 +12,12 @@ class SecondDetailScreen extends StatelessWidget {
           children: [
             ElevatedButton(
                 onPressed: () {
-                  context.goNamed(ProfileRoutes.profileScreen);
+                  // context.goNamed(ProfileRoutes.profileScreen);
                 },
                 child: const Text('go ProfileScreen')),
             ElevatedButton(
                 onPressed: () {
-                  context.goNamed(MainRoutes.mainScreen);
+                  // context.goNamed(MainRoutes.mainScreen);
                 },
                 child: const Text('go MainScreen')),
           ],

@@ -3,6 +3,17 @@ import 'package:go_router/go_router.dart';
 
 import 'package:go_router_example/main.dart';
 
+class MyRoute {
+  static String mainScreenName = 'main_screen';
+  static String mainScreenPath = '/main';
+  static String authScreenPath = '/auth';
+  static String authScreenName = 'auth_screen';
+  static String webViewScreenName = 'web_view_screen';
+  static String webViewScreenPath = '/web_view_screen';
+  static String confirmScreenPath = '/confirm_screen';
+  static String confirmScreenName = 'confirm_screen';
+}
+
 /// Класс, реализующий роутер приложения и все поля классов
 class AppRouter {
   /// Ключ для доступа к корневому навигатору приложения
@@ -16,19 +27,22 @@ class AppRouter {
         builder: (_, __, navigationShell) =>
             RootScreen(navigationShell: navigationShell),
         branches: [
-          StatefulShellBranch(initialLocation: '/main', routes: [
-            GoRoute(
-              path: '/main',
-              name: 'main_screen',
-              builder: (context, state) => const MainScreen(),
-            )
-          ]),
           StatefulShellBranch(
-            initialLocation: '/auth',
+            initialLocation: MyRoute.mainScreenPath,
             routes: [
               GoRoute(
-                path: '/auth',
-                name: 'auth_screen',
+                path: MyRoute.mainScreenPath,
+                name: MyRoute.mainScreenName,
+                builder: (context, state) => const MainScreen(),
+              )
+            ],
+          ),
+          StatefulShellBranch(
+            initialLocation: MyRoute.authScreenPath,
+            routes: [
+              GoRoute(
+                path: MyRoute.authScreenPath,
+                name: MyRoute.authScreenName,
                 builder: (context, state) => const AuthScreen(),
               ),
             ],
@@ -37,13 +51,13 @@ class AppRouter {
       ),
       // Отдельный роут
       GoRoute(
-          path: '/web_view_screen',
-          name: 'web_view_screen',
+          path: MyRoute.webViewScreenPath,
+          name: MyRoute.webViewScreenName,
           builder: (context, state) => const WebViewScreen(),
           routes: [
             GoRoute(
-              path: '/confirm_screen',
-              name: 'confirm_screen',
+              path: MyRoute.confirmScreenPath,
+              name: MyRoute.confirmScreenName,
               builder: (context, state) => const ConfirmScreen(),
             )
           ])
@@ -51,7 +65,7 @@ class AppRouter {
     return GoRouter(
       debugLogDiagnostics: true,
       navigatorKey: rootNavigatorKey,
-      initialLocation: '/main',
+      initialLocation: MyRoute.authScreenPath,
       routes: routes,
     );
   }

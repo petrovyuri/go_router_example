@@ -51,7 +51,7 @@ class MainScreen extends StatelessWidget {
       body: Center(
           child: ElevatedButton(
         onPressed: () {
-          //  context.pushNamed(WebviewRoutes.webViewScreen);
+          //  context.push(MyRoute.webViewScreenPath);
         },
         child: const Text('Перейти на WebViewScreen'),
       )),
@@ -69,7 +69,7 @@ class AuthScreen extends StatelessWidget {
       body: Center(
         child: ElevatedButton(
             onPressed: () {
-              //  context.pushNamed(WebviewRoutes.webViewScreen);
+              context.go('/main');
             },
             child: const Text('Перейти на WebViewScreen')),
       ),

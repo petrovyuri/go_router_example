@@ -62,7 +62,7 @@ class SecondScreen extends StatelessWidget {
       body: Center(
         child: ElevatedButton(
           onPressed: () {
-            context.pushNamed(MyRoute.secondScreenName);
+            context.pushNamed(MyRoute.nestedScreenName);
           },
           child: const Text('Перейти на NestedScreen'),
         ),

@@ -22,7 +22,7 @@ class MainScreen extends StatelessWidget {
       body: Center(
         child: ElevatedButton(
           onPressed: () {
-            context.push(MyRoute.secondScreenPath);
+            context.pushNamed(MyRoute.secondScreenName);
           },
           child: const Text('Перейти на SecondScreen'),
         ),
@@ -42,7 +42,7 @@ class AuthScreen extends StatelessWidget {
       body: Center(
         child: ElevatedButton(
           onPressed: () {
-            context.push(MyRoute.secondScreenPath);
+            context.pushNamed(MyRoute.secondScreenName);
           },
           child: const Text('Перейти на SecondScreen'),
         ),
@@ -62,7 +62,7 @@ class SecondScreen extends StatelessWidget {
       body: Center(
         child: ElevatedButton(
           onPressed: () {
-            context.push(MyRoute.nestedScreenPath);
+            context.pushNamed(MyRoute.secondScreenName);
           },
           child: const Text('Перейти на NestedScreen'),
         ),

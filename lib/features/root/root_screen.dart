@@ -127,25 +127,28 @@ class _RootScreenState extends State<RootScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: NoAnimationScope(
-        child: IndexedStack(
-          index: _tab.index,
-          children: const <Widget>[
-            HomeTab(),
-            ProfileTab(),
-            AuthTab(),
-          ],
+    return PopScope(
+      canPop: false,
+      child: Scaffold(
+        body: NoAnimationScope(
+          child: IndexedStack(
+            index: _tab.index,
+            children: const <Widget>[
+              HomeTab(),
+              ProfileTab(),
+              AuthTab(),
+            ],
+          ),
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Main'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
-          BottomNavigationBarItem(icon: Icon(Icons.login), label: 'Auth'),
-        ],
-        currentIndex: _tab.index,
-        onTap: _onItemTapped,
+        bottomNavigationBar: BottomNavigationBar(
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Main'),
+            BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+            BottomNavigationBarItem(icon: Icon(Icons.login), label: 'Auth'),
+          ],
+          currentIndex: _tab.index,
+          onTap: _onItemTapped,
+        ),
       ),
     );
   }

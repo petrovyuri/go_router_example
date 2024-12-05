@@ -8,10 +8,10 @@ class MyRoute {
   static String mainScreenPath = '/main';
   static String authScreenPath = '/auth';
   static String authScreenName = 'auth_screen';
-  static String webViewScreenName = 'web_view_screen';
-  static String webViewScreenPath = '/web_view_screen';
-  static String confirmScreenPath = '/confirm_screen';
-  static String confirmScreenName = 'confirm_screen';
+  static String secondScreenName = 'second_screen';
+  static String secondScreenPath = '/second_screen';
+  static String nestedScreenPath = '/nested_screen';
+  static String nestedScreenName = 'nested_screen';
 }
 
 /// Класс, реализующий роутер приложения и все поля классов
@@ -51,14 +51,14 @@ class AppRouter {
       ),
       // Отдельный роут
       GoRoute(
-          path: MyRoute.webViewScreenPath,
-          name: MyRoute.webViewScreenName,
-          builder: (context, state) => const WebViewScreen(),
+          path: MyRoute.secondScreenPath,
+          name: MyRoute.secondScreenName,
+          builder: (context, state) => const SecondScreen(),
           routes: [
             GoRoute(
-              path: MyRoute.confirmScreenPath,
-              name: MyRoute.confirmScreenName,
-              builder: (context, state) => const ConfirmScreen(),
+              path: MyRoute.nestedScreenPath,
+              name: MyRoute.nestedScreenPath,
+              builder: (context, state) => const NestedScreen(),
             )
           ])
     ];

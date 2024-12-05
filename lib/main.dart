@@ -77,33 +77,33 @@ class AuthScreen extends StatelessWidget {
   }
 }
 
-class WebViewScreen extends StatelessWidget {
-  const WebViewScreen({super.key});
+class SecondScreen extends StatelessWidget {
+  const SecondScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('WebViewScreen')),
+      appBar: AppBar(title: const Text('SecondScreen')),
       body: Center(
         child: ElevatedButton(
             onPressed: () {
               // context.goNamed(WebviewRoutes.confirmScreen);
             },
-            child: const Text('Перейти на ConfirmScreen')),
+            child: const Text('Перейти на NestedScreen')),
       ),
     );
   }
 }
 
-class ConfirmScreen extends StatelessWidget {
-  const ConfirmScreen({super.key});
+class NestedScreen extends StatelessWidget {
+  const NestedScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('ConfirmScreen')),
+      appBar: AppBar(title: const Text('NestedScreen')),
       body: const Center(
-        child: Text('ConfirmScreen'),
+        child: Text('NestedScreen'),
       ),
     );
   }

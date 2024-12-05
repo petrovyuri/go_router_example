@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:go_router_example/main.dart';
@@ -14,59 +14,97 @@ class MyRoute {
   static String nestedScreenName = 'nested_screen';
 }
 
-/// Класс, реализующий роутер приложения и все поля классов
 class AppRouter {
-  /// Ключ для доступа к корневому навигатору приложения
   static final rootNavigatorKey = GlobalKey<NavigatorState>();
+  final GlobalKey<NavigatorState> _shellNavigatorKey =
+      GlobalKey<NavigatorState>();
 
-  /// Метод для инициализации экземпляра GoRouter
   GoRouter initRouter() {
-    final routes = [
-      StatefulShellRoute.indexedStack(
-        parentNavigatorKey: rootNavigatorKey,
-        builder: (_, __, navigationShell) =>
-            RootScreen(navigationShell: navigationShell),
-        branches: [
-          StatefulShellBranch(
-            initialLocation: MyRoute.mainScreenPath,
-            routes: [
-              GoRoute(
-                path: MyRoute.mainScreenPath,
-                name: MyRoute.mainScreenName,
-                builder: (context, state) => const MainScreen(),
-              )
-            ],
-          ),
-          StatefulShellBranch(
-            initialLocation: MyRoute.authScreenPath,
-            routes: [
-              GoRoute(
-                path: MyRoute.authScreenPath,
-                name: MyRoute.authScreenName,
-                builder: (context, state) => const AuthScreen(),
-              ),
-            ],
-          )
-        ],
-      ),
-      // Отдельный роут
-      GoRoute(
-          path: MyRoute.secondScreenPath,
-          name: MyRoute.secondScreenName,
-          builder: (context, state) => const SecondScreen(),
-          routes: [
-            GoRoute(
-              path: MyRoute.nestedScreenPath,
-              name: MyRoute.nestedScreenPath,
-              builder: (context, state) => const NestedScreen(),
-            )
-          ])
-    ];
     return GoRouter(
-      debugLogDiagnostics: true,
       navigatorKey: rootNavigatorKey,
       initialLocation: MyRoute.authScreenPath,
-      routes: routes,
+      routes: [
+        ShellRoute(
+          navigatorKey: _shellNavigatorKey,
+          builder: (context, state, child) {
+            return Scaffold(
+              body: child,
+              bottomNavigationBar: BottomNavigationBar(
+                items: const [
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.home), label: 'Main'),
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.login), label: 'Auth'),
+                ],
+                currentIndex: _calculateCurrentIndex(context),
+                onTap: (index) => _onTap(context, index),
+              ),
+            );
+          },
+          routes: [
+            StatefulShellRoute.indexedStack(
+              builder: (context, state, navigationShell) {
+                return navigationShell;
+              },
+              branches: [
+                StatefulShellBranch(
+                  routes: [
+                    GoRoute(
+                      path: MyRoute.mainScreenPath,
+                      name: MyRoute.mainScreenName,
+                      builder: (context, state) => const MainScreen(),
+                    ),
+                  ],
+                ),
+                StatefulShellBranch(
+                  routes: [
+                    GoRoute(
+                      path: MyRoute.authScreenPath,
+                      name: MyRoute.authScreenName,
+                      builder: (context, state) => const AuthScreen(),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            GoRoute(
+              path: MyRoute.secondScreenPath,
+              name: MyRoute.secondScreenName,
+              parentNavigatorKey: _shellNavigatorKey,
+              builder: (context, state) => const SecondScreen(),
+              routes: [
+                GoRoute(
+                  path: MyRoute.nestedScreenPath,
+                  name: MyRoute.nestedScreenName,
+                  builder: (context, state) => const NestedScreen(),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ],
     );
+  }
+
+  int _calculateCurrentIndex(BuildContext context) {
+    final location = GoRouterState.of(context).path;
+    if (location?.startsWith(MyRoute.mainScreenPath) == true) {
+      return 0;
+    }
+    if (location?.startsWith(MyRoute.authScreenPath) == true) {
+      return 1;
+    }
+    return 0; // Значение по умолчанию
+  }
+
+  void _onTap(BuildContext context, int index) {
+    switch (index) {
+      case 0:
+        context.go(MyRoute.mainScreenPath);
+        break;
+      case 1:
+        context.go(MyRoute.authScreenPath);
+        break;
+    }
   }
 }

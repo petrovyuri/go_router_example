@@ -14,7 +14,7 @@ class MyRoute {
   static String secondScreenPath = '/second_screen';
 
   static String nestedScreenName = 'nested_screen';
-  static String nestedScreenPath = '/second_screen/nested_screen';
+  static String nestedScreenPath = '/nested_screen';
 }
 
 /// Класс, реализующий роутер приложения
@@ -60,18 +60,18 @@ class AppRouter {
             ),
             // Определяем SecondScreen на верхнем уровне
             GoRoute(
-              path: MyRoute.secondScreenPath,
-              name: MyRoute.secondScreenName,
-              parentNavigatorKey: _shellNavigatorKey,
-              builder: (context, state) => const SecondScreen(),
-            ),
-            // Определяем NestedScreen на верхнем уровне
-            GoRoute(
-              path: MyRoute.nestedScreenPath,
-              name: MyRoute.nestedScreenName,
-              parentNavigatorKey: _shellNavigatorKey,
-              builder: (context, state) => const NestedScreen(),
-            ),
+                path: MyRoute.secondScreenPath,
+                name: MyRoute.secondScreenName,
+                parentNavigatorKey: _shellNavigatorKey,
+                builder: (context, state) => const SecondScreen(),
+                routes: [
+                  GoRoute(
+                    path: MyRoute.nestedScreenPath,
+                    name: MyRoute.nestedScreenName,
+                    parentNavigatorKey: _shellNavigatorKey,
+                    builder: (context, state) => const NestedScreen(),
+                  ),
+                ]),
           ],
         ),
       ],

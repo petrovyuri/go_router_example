@@ -5,8 +5,8 @@ import 'package:octopus/octopus.dart';
 /// Хелпер чтобы проще было
 extension RootTabsHelper on Octopus {
   Future<void> openInTab(
-    RootTabs tab,
     Routes route, {
+    RootTabs? tab,
     bool setActiveTab = true,
   }) {
     // Можно попроще
@@ -18,15 +18,17 @@ extension RootTabsHelper on Octopus {
 
     return setState(
       (state) {
+        tab ??= RootTabs.fromValue(state.arguments[RootTabs.argument]);
+
         /// Находим ноду с табом
-        final tabNode = state.findByName(tab.routeName);
+        final tabNode = state.findByName(tab!.routeName);
 
         /// Добавляем страницу в ноду
         tabNode?.add(route.node());
 
         if (setActiveTab) {
           /// Делаем вкладку активной
-          state.arguments[RootTabs.argument] = tab.name;
+          state.arguments[RootTabs.argument] = tab!.name;
         }
 
         /// Возвращаем новое состояние

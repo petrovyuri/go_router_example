@@ -25,8 +25,7 @@ class ProfileScreen extends StatelessWidget {
       appBar: AppBar(title: const Text('ProfileScreen')),
       body: Center(
         child: ElevatedButton(
-          onPressed: () =>
-              context.octopus.openInTab(RootTabs.profile, Routes.detail),
+          onPressed: () => context.octopus.openInTab(Routes.detail),
           child: const Text('Перейти на DetailScreen'),
         ),
       ),

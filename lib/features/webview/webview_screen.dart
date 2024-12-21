@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 class WebViewScreen extends StatelessWidget {
@@ -5,6 +7,7 @@ class WebViewScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    log('Build WebView');
     return Scaffold(
       appBar: AppBar(title: const Text('WebViewScreen')),
       body: Center(

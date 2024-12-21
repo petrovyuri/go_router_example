@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router_example/features/root/root_screen.dart';
 import 'package:go_router_example/router/root_tabs_helper.dart';
 import 'package:go_router_example/router/routes.dart';
 import 'package:octopus/octopus.dart';
@@ -14,7 +13,6 @@ class DetailScreen extends StatelessWidget {
       body: Center(
         child: ElevatedButton(
             onPressed: () => context.octopus.openInTab(
-                  RootTabs.profile,
                   Routes.secondDetail,
                 ),
             child: const Text('go SecondDetailScreen')),

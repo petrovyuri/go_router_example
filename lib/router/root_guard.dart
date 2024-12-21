@@ -57,6 +57,9 @@ class RootGuard extends OctopusGuard {
 
     /// Все ето можно сделать через map по RootTabs, но мне лень
 
+    if (!state.arguments.containsKey(RootTabs.argument)) {
+      state.arguments.addAll({RootTabs.argument: RootTabs.home.name});
+    }
     return state;
   }
 }

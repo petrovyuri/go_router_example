@@ -32,19 +32,20 @@ class HomeScreen extends StatelessWidget {
             child: const Text('Перейти на WebViewScreen глобально'),
           ),
           ElevatedButton(
-            onPressed: () =>
-                context.octopus.openInTab(RootTabs.home, Routes.webView),
+            onPressed: () => context.octopus.openInTab(Routes.webView),
             child: const Text('Перейти на WebViewScreen внутри main'),
           ),
           ElevatedButton(
-            onPressed: () =>
-                context.octopus.openInTab(RootTabs.profile, Routes.webView),
+            onPressed: () => context.octopus.openInTab(
+              Routes.webView,
+              tab: RootTabs.profile,
+            ),
             child: const Text('Перейти на WebViewScreen внутри profile'),
           ),
           ElevatedButton(
             onPressed: () => context.octopus.openInTab(
-              RootTabs.profile,
               Routes.webView,
+              tab: RootTabs.profile,
               setActiveTab: false,
             ),
             child: const Text(

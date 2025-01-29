@@ -8,7 +8,7 @@ class MyNavigatorObserver extends NavigatorObserver {
 
   @override
   void didPop(Route<dynamic> route, Route<dynamic>? previousRoute) {
-    if (previousRoute!.settings.name == '/') {
+    if (previousRoute?.settings.name == '/') {
       goRouter.go('/');
     }
     super.didPop(route, previousRoute);

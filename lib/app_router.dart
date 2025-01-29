@@ -1,72 +1,55 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
 import 'package:go_router_example/main.dart';
+import 'package:go_router_example/screens.dart';
 
-class MyRoute {
-  static String mainScreenName = 'main_screen';
-  static String mainScreenPath = '/main';
-  static String authScreenPath = '/auth';
-  static String authScreenName = 'auth_screen';
-  static String secondScreenName = 'second_screen';
-  static String secondScreenPath = '/second_screen';
-  static String nestedScreenPath = '/nested_screen';
-  static String nestedScreenName = 'nested_screen';
-}
+final rootNavigatorKey = GlobalKey<NavigatorState>();
 
-/// Класс, реализующий роутер приложения и все поля классов
-class AppRouter {
-  /// Ключ для доступа к корневому навигатору приложения
-  static final rootNavigatorKey = GlobalKey<NavigatorState>();
-
-  /// Метод для инициализации экземпляра GoRouter
-  GoRouter initRouter() {
-    final routes = [
-      StatefulShellRoute.indexedStack(
-        parentNavigatorKey: rootNavigatorKey,
-        builder: (_, __, navigationShell) =>
-            RootScreen(navigationShell: navigationShell),
-        branches: [
-          StatefulShellBranch(
-            initialLocation: MyRoute.mainScreenPath,
-            routes: [
-              GoRoute(
-                path: MyRoute.mainScreenPath,
-                name: MyRoute.mainScreenName,
-                builder: (context, state) => const MainScreen(),
-              )
-            ],
-          ),
-          StatefulShellBranch(
-            initialLocation: MyRoute.authScreenPath,
-            routes: [
-              GoRoute(
-                path: MyRoute.authScreenPath,
-                name: MyRoute.authScreenName,
-                builder: (context, state) => const AuthScreen(),
-              ),
-            ],
-          )
-        ],
-      ),
-      // Отдельный роут
+GoRouter goRouter = GoRouter(
+    debugLogDiagnostics: true,
+    navigatorKey: rootNavigatorKey,
+    initialLocation: '/',
+    routes: [
       GoRoute(
-          path: MyRoute.secondScreenPath,
-          name: MyRoute.secondScreenName,
-          builder: (context, state) => const SecondScreen(),
+          path: '/',
+          builder: (context, state) => const RootScreen(),
+          redirect: (context, state) {
+            if (state.fullPath == '/') {
+              return '/main';
+            }
+            return null;
+          },
           routes: [
+            StatefulShellRoute.indexedStack(
+              parentNavigatorKey: rootNavigatorKey,
+              builder: (_, __, navigationShell) => ShellScreen(navigationShell: navigationShell),
+              branches: [
+                StatefulShellBranch(
+                  initialLocation: '/main',
+                  routes: [
+                    GoRoute(
+                      path: '/main',
+                      name: 'main_screen',
+                      builder: (context, state) => const MainScreen(),
+                    )
+                  ],
+                ),
+                StatefulShellBranch(
+                  initialLocation: '/auth',
+                  routes: [
+                    GoRoute(
+                      path: '/auth',
+                      name: 'auth_screen',
+                      builder: (context, state) => const AuthScreen(),
+                    ),
+                  ],
+                )
+              ],
+            ),
             GoRoute(
-              path: MyRoute.nestedScreenPath,
-              name: MyRoute.nestedScreenPath,
-              builder: (context, state) => const NestedScreen(),
+              path: '/global',
+              name: 'global_screen',
+              builder: (context, state) => const GlobalScreen(),
             )
           ])
-    ];
-    return GoRouter(
-      debugLogDiagnostics: true,
-      navigatorKey: rootNavigatorKey,
-      initialLocation: MyRoute.authScreenPath,
-      routes: routes,
-    );
-  }
-}
+    ]);

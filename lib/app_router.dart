@@ -3,11 +3,24 @@ import 'package:go_router/go_router.dart';
 import 'package:go_router_example/main.dart';
 import 'package:go_router_example/screens.dart';
 
+class MyNavigatorObserver extends NavigatorObserver {
+  MyNavigatorObserver();
+
+  @override
+  void didPop(Route<dynamic> route, Route<dynamic>? previousRoute) {
+    if (previousRoute!.settings.name == '/') {
+      goRouter.go('/');
+    }
+    super.didPop(route, previousRoute);
+  }
+}
+
 final rootNavigatorKey = GlobalKey<NavigatorState>();
 
 GoRouter goRouter = GoRouter(
     debugLogDiagnostics: true,
     navigatorKey: rootNavigatorKey,
+    observers: [MyNavigatorObserver()],
     initialLocation: '/',
     routes: [
       GoRoute(

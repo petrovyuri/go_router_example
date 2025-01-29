@@ -3,12 +3,13 @@ import 'package:go_router/go_router.dart';
 import 'package:go_router_example/app_router.dart';
 
 void main() {
-  // const link = '/global';
-  // goRouter.go(link);
+  const link = '/global';
+  goRouter.go(link);
 
   runApp(MaterialApp.router(
     title: 'go_router demo',
     routerConfig: goRouter,
+    
   ));
 }
 

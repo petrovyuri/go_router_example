@@ -22,7 +22,7 @@ class AuthScreen extends StatelessWidget {
       appBar: AppBar(title: const Text('AuthScreen')),
       body: ElevatedButton(
           onPressed: () {
-            context.push('/global');
+            context.go('/global');
           },
           child: const Text('Перейти на глобальный экран')),
     );
